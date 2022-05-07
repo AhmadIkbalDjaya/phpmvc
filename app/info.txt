@@ -1,0 +1,2 @@
+untuk menyimpan folder dan file2 untama dari aplikasi mvc
+dan tidak dapat diakses oleh  uuser
