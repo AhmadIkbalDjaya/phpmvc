@@ -1,29 +1,21 @@
 <?php
 
 class Mahasiswa_model{
-    // connect db dengan driver pdo(php data object)
-    // lebih muda dari mysqli
-    private $dbh;   //dbh(database handler) untk menampung koneksi ke db
-    private $stmt;  //stmt(statement) untuk menyimpan query
+    private $table = 'mahasiswa';
+    private $db;
 
     public function __construct(){
-        // data source name
-        $dsn = 'mysql:host=localhost;dbname=phpmvc';
-
-        try{
-            // PDO(dsn, username, password);
-            $this->dbh = new PDO($dsn, 'root', '');
-        } catch(PDOException $e){
-            die($e->getMessage());
-        }
+        $this->db = new Database;
     }
 
     public function getAllMahasiswa(){
+        $this->db->query('SELECT * FROM '. $this->table);
+        return $this->db->resultSet ();
+    }
 
-        $this->stmt = $this->dbh->prepare('SELECT * FROM mahasiswa');
-        // menjalankan query
-        $this->stmt->execute();
-        // mengmabil semua data sebagai array assosiatif
-        return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
+    public function getMahasiswaByNIS($nis){
+        $this->db->query('SELECT * FROM ' . $this->table . ' WHERE nis=:nis');
+        $this->db->bind('nis', $nis);
+        return $this->db->single();
     }
 }

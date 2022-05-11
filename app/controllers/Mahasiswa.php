@@ -8,4 +8,12 @@ class Mahasiswa extends Controller{
         $this->view('mahasiswa/index', $data);
         $this->view('templates/footer');
     }
+
+    public function detail($nis){
+        $data['judul'] = "Detail Mahasiswa";
+        $data['mhs'] = $this->model('Mahasiswa_model')->getMahasiswaByNIS($nis);
+        $this->view('templates/header', $data);
+        $this->view('mahasiswa/detail', $data);
+        $this->view('templates/footer');
+    }    
 }
