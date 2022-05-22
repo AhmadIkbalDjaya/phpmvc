@@ -35,4 +35,14 @@ class Mahasiswa_model{
 
                     return $this->db->hitungBaris();
     }
+
+    public function hapusDataMahasiswa($nis){
+        $query = "DELETE FROM mahasiswa WHERE nis= :nis";
+        $this->db->query($query);
+        $this->db->bind('nis', $nis);
+
+        $this->db->execute();
+
+        return $this->db->hitungBaris();
+    }
 }
