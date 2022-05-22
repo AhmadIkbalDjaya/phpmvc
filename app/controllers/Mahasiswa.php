@@ -40,6 +40,21 @@ class Mahasiswa extends Controller{
             exit;
         }
     }
+
+    public function getUbah(){
+        echo json_encode($this->model('Mahasiswa_model')->getMahasiswaByNIS($_POST['nis']));
+    }
     
+    public function ubah(){
+        if( $this->model('Mahasiswa_model')->ubahDataMahasiswa($_POST) > 0 ){
+            Flasher::setFlash('Berhasil','Diubah','success');
+            header('Location: ' . BASEURL . '/mahasiswa');
+            exit;
+        }else{
+            Flasher::setFlash('Gagal','Diubah','danger');
+            header('Location: ' . BASEURL . '/mahasiswa');
+            exit;
+        }
+    }
 
 }

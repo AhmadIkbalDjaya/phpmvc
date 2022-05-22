@@ -24,22 +24,44 @@ class Mahasiswa_model{
                         VALUES
                     ('', :nama, :nis, :email, :alamat, :jurusan)";
 
-                    $this->db->query($query);
-                    $this->db->bind('nama', $data['nama']);
-                    $this->db->bind('nis', $data['nis']);
-                    $this->db->bind('email', $data['email']);
-                    $this->db->bind('alamat', $data['alamat']);
-                    $this->db->bind('jurusan', $data['jurusan']);
+        $this->db->query($query);
+        $this->db->bind('nama', $data['nama']);
+        $this->db->bind('nis', $data['nis']);
+        $this->db->bind('email', $data['email']);
+        $this->db->bind('alamat', $data['alamat']);
+        $this->db->bind('jurusan', $data['jurusan']);
 
-                    $this->db->execute();
+        $this->db->execute();
 
-                    return $this->db->hitungBaris();
+        return $this->db->hitungBaris();
     }
 
     public function hapusDataMahasiswa($nis){
         $query = "DELETE FROM mahasiswa WHERE nis= :nis";
         $this->db->query($query);
         $this->db->bind('nis', $nis);
+
+        $this->db->execute();
+
+        return $this->db->hitungBaris();
+    }
+
+    public function ubahDataMahasiswa($data){
+        $query =    "UPDATE mahasiswa SET
+                    nama = :nama,
+                    nis = :nis,
+                    email = :email,
+                    alamat = :alamat,
+                    jurusan = :jurusan
+                    WHERE id = :id";
+
+        $this->db->query($query);
+        $this->db->bind('nama', $data['nama']);
+        $this->db->bind('nis', $data['nis']);
+        $this->db->bind('email', $data['email']);
+        $this->db->bind('alamat', $data['alamat']);
+        $this->db->bind('jurusan', $data['jurusan']);
+        $this->db->bind('id', $data['id']);
 
         $this->db->execute();
 

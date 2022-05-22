@@ -8,7 +8,7 @@
     <div class="row">
         <div class="col-6">
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#formModal">
+            <button type="button" class="btn btn-primary tombolTambahData" data-bs-toggle="modal" data-bs-target="#formModal">
                 Tambah Data Mahasiswa
             </button>
             <br><br>
@@ -17,6 +17,7 @@
                 <?php foreach( $data['mhs'] as $mhs ) : ?>
                     <li class="list-group-item"><?= $mhs['nama']?>
                     <a href="<?= BASEURL;?>mahasiswa/hapus/<?= $mhs['nis']?>" class="badge rounded-pill bg-danger float-end" onclick="return confirm('yakin?')">Hapus</a>
+                    <a href="<?= BASEURL;?>mahasiswa/ubah/<?= $mhs['nis']?>" class="badge rounded-pill bg-warning float-end tampilModalUbah" data-bs-toggle="modal" data-bs-target="#formModal" data-nis="<?=$mhs['nis'];?>">Ubah</a>
                     <a href="<?= BASEURL;?>mahasiswa/detail/<?= $mhs['nis']?>" class="badge rounded-pill bg-primary float-end">Detail</a>
                     </li>
                 <?php endforeach; ?>
@@ -36,6 +37,7 @@
         </div>
         <div class="modal-body">
             <form action="<?= BASEURL; ?>/mahasiswa/tambah" method="post">
+            <input type="hidden" name="id" id="id" >
                 <div class="mb-3">
                     <label for="nama" class="form-label">Nama</label>
                     <input type="text" class="form-control" id="nama" name="nama">
